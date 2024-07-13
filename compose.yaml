@@ -1,0 +1,9 @@
+services:
+  smtp2http:
+    build:
+      context: .
+    environment:
+      SMTP_PORT: 25 # optional
+      WEBHOOK_URL: http://192.168.1.10:8080/webhook
+    ports:
+      - 25:25
