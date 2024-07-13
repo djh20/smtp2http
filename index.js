@@ -3,7 +3,7 @@ import { simpleParser } from "mailparser";
 import axios from "axios";
 import "dotenv/config";
 
-const SMTP_PORT = parseInt(process.env.SMTP_PORT) ?? 25;
+const SMTP_PORT = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT) : 25;
 const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
 const server = new SMTPServer({
@@ -27,3 +27,5 @@ server.listen(SMTP_PORT, null, null, () => {
 });
 
 server.on("error", (err) => console.log(err.message));
+
+process.on("SIGTERM", () => process.exit());
